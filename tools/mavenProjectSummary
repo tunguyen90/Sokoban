@@ -1,0 +1,115 @@
+files=`find . -name pom.xml | grep -v target | sed -n 's/^\(.*\)\/pom.xml$/\1/p'`
+
+pomLines=0
+publicClasses=0
+totalLines=0
+javaLines=0
+xmlLines=0
+htmlLines=0
+cssLines=0
+jsLines=0
+sum=0
+
+for file in $files ; do
+
+    name=`cat $file/pom.xml | grep \<name\> | sed -n 's/<name>\(.*\)<\/name>/\1/p'`
+
+    packaging=`cat $file/pom.xml | grep \<packaging\> | sed -n 's/<packaging>\(.*\)<\/packaging>/\1/p'`
+    packaging=`echo $packaging | awk '{ print $1 }'`
+
+    if [ $packaging != "pom" ] ; then
+
+        currentPomLines=`wc -l $file/pom.xml | awk '{ print $1 }'`
+        pomLines=`expr $pomLines + $currentPomLines`
+
+        classCounter=`find $file/src -name *.java | wc -l | awk '{ print $1 }'`
+        publicClasses=`expr $publicClasses + $classCounter`
+
+        totalCounter=0
+        for totalFile in `find $file/src -name *.java` ; do
+           totalCounter=`expr $totalCounter + \`wc -l $totalFile | awk '{ print $1 }'\``
+        done
+        totalLines=`expr $totalLines + $totalCounter`
+
+        javaCounter=0
+        for javaFile in `find $file/src -name *.java` ; do
+            javaCounter=`expr $javaCounter + \`java_count $javaFile | tail -1\``
+        done
+        javaLines=`expr $javaLines + $javaCounter`
+
+        xmlCounter=0
+        for xmlFile in `find $file/src -name *.xml` ; do
+            xmlCounter=`expr $xmlCounter + \`wc -l $xmlFile | awk '{ print $1 }'\``
+        done
+        xmlLines=`expr $xmlLines + $xmlCounter`
+
+        htmlCounter=0
+        for htmlFile in `find $file/src -name *html` ; do
+            htmlCounter=`expr $htmlCounter + \`wc -l $htmlFile | awk '{ print $1 }'\``
+        done
+        htmlLines=`expr $htmlLines + $htmlCounter`
+
+        cssCounter=0
+        for cssFile in `find $file/src -name *.css` ; do
+            cssCounter=`expr $cssCounter + \`wc -l $cssFile | awk '{ print $1 }'\``
+        done
+        cssLines=`expr $cssLines + $cssCounter`
+
+        jsCounter=0
+        for jsFile in `find $file/src -name *.js` ; do
+            jsCounter=`expr $jsCounter + \`wc -l $jsFile | awk '{ print $1 }'\``
+        done
+        jsLines=`expr $jsLines + $jsCounter`
+
+        currentSum=`expr $currentPomLines + $totalCounter`
+        currentSum=`expr $currentSum + $xmlCounter`
+        currentSum=`expr $currentSum + $htmlCounter`
+        currentSum=`expr $currentSum + $cssCounter`
+        currentSum=`expr $currentSum + $jsCounter`
+
+        sum=`expr $sum + $currentSum`
+
+        echo
+
+        echo -n $name # | sed -n 's/\.\/\(.*\)/\1/p'
+        echo ":"
+        echo "    Packaging type: $packaging"
+        echo "    POM lines:      $currentPomLines `expr \`expr 100 \* $currentPomLines\` / $currentSum`%"
+        echo "    Public classes: $classCounter"
+        echo "    Total lines:    $totalCounter `expr \`expr 100 \* $totalCounter\` / $currentSum`%"
+        echo "--------"
+        if [ $javaCounter -ne 0 ] ; then
+            echo "    Java lines:     $javaCounter `expr \`expr 100 \* $javaCounter\` / $currentSum`%"
+        fi
+        if [ $xmlCounter -ne 0 ] ; then
+            echo "    XML lines:      $xmlCounter `expr \`expr 100 \* $xmlCounter\` / $currentSum`%"
+        fi
+        if [ $htmlCounter -ne 0 ] ; then
+            echo "    HTML lines:     $htmlCounter `expr \`expr 100 \* $htmlCounter\` / $currentSum`%"
+        fi
+        if [ $cssCounter -ne 0 ] ; then
+            echo "    CSS lines:      $cssCounter `expr \`expr 100 \* $cssCounter\` / $currentSum`%"
+        fi
+        if [ $jsCounter -ne 0 ] ; then
+            echo "    JS lines:       $jsCounter `expr \`expr 100 \* $jsLines\` / $currentSum`%"
+        fi
+        echo "--------"
+        echo "    All lines:      $currentSum"
+
+    fi
+
+done
+
+echo
+echo SUMMARY:
+echo "POM lines:      $pomLines `expr \`expr 100 \* $pomLines\` / $sum`%"
+echo "Public classes: $publicClasses"
+echo "Total lines:    $totalLines `expr \`expr 100 \* $totalLines\` / $sum`%"
+echo "----"
+echo "Java lines:     $javaLines `expr \`expr 100 \* $javaLines\` / $sum`%"
+echo "XML lines:      $xmlLines `expr \`expr 100 \* $xmlLines\` / $sum`%"
+echo "HTML lines:     $htmlLines `expr \`expr 100 \* $htmlLines\` / $sum`%"
+echo "CSS lines:      $cssLines `expr \`expr 100 \* $cssLines\` / $sum`%"
+echo "JS lines:       $jsLines `expr \`expr 100 \* $jsLines\` / $sum`%"
+echo "----"
+echo "All lines:      $sum"

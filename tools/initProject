@@ -1,0 +1,52 @@
+#!/bin/bash
+
+######################################################
+# Use to set "tools" directory appropriately, f. e.
+# cd $PROJECT
+# tools/initProject .
+######################################################
+
+function makeDir {
+
+    if [ ! -e $1 ] ; then
+
+        mkdir $1
+
+    fi
+
+}
+
+if [ $# -ne 1 ] ; then
+    
+    echo "Usage: $0 <directory>"
+
+fi
+
+directory=`cd \`dirname $1\`; pwd`/`basename $1`
+
+if [ ! -z `echo $directory | sed -n '/.*\.\./p'` ] ; then
+
+    directory=`echo $directory | sed -n 's/\(.*\)\.\./\1/p'`
+
+fi
+
+if [ ! -z `echo $directory | sed -n '/.*\./p'` ] ; then
+
+    directory=`echo $directory | sed -n 's/\(.*\)\./\1/p'`
+
+fi
+
+if [ ! -z `echo $directory | sed -n '/.*\//p'` ] ; then
+
+    directory=`echo $directory | sed -n 's/\(.*\)\//\1/p'`
+
+fi
+
+makeDir $directory
+makeDir $directory/system
+makeDir $directory/tools
+makeDir $directory/docs
+makeDir $directory/examples
+makeDir $directory/libs
+
+PATH="$PATH:$directory/tools"
