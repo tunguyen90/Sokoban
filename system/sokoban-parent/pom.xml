@@ -18,6 +18,7 @@
 		<module>sokoban-lib</module>
 		<module>sokoban-model</module>
 		<module>sokoban-view</module>
+		<module>sokoban-start</module>
 	</modules>
 
 	<build>
@@ -34,12 +35,14 @@
 		</plugins>
 	</build>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

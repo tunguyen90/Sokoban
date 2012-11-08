@@ -10,11 +10,4 @@
 	</parent>
 	<artifactId>sokoban-view</artifactId>
 	<name>sokoban-view</name>
-	<dependencies>
-		<dependency>
-			<groupId>pl.edu.pw.elka.sokoban</groupId>
-			<artifactId>sokoban-model</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
 </project>
