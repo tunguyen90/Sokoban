@@ -2,6 +2,8 @@ package pl.edu.pw.elka.sokoban.view;
 
 import java.util.concurrent.BlockingQueue;
 
+import javax.swing.SwingUtilities;
+
 import pl.edu.pw.elka.sokoban.view.event.Event;
 
 
@@ -25,6 +27,42 @@ public class View {
         
         mainWindow = new MainWindow(blockingQueue);
 
+    }
+    
+    /**
+     * Presents the application.
+     */
+    public void present() {
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            
+            @Override
+            public void run() {
+
+                mainWindow.present();
+                
+            }
+            
+        });
+        
+    }
+    
+    /**
+     * Hides the application.
+     */
+    public void unpresent() {
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            
+            @Override
+            public void run() {
+
+                mainWindow.unpresent();
+                
+            }
+            
+        });
+        
     }
 
 }
