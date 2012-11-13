@@ -12,8 +12,10 @@ import pl.edu.pw.elka.sokoban.view.event.Event;
  */
 class MainWindow extends JFrame {
     
+    private static final long serialVersionUID = -1241078495410054915L;
+    
     private BlockingQueue<Event> blockingQueue;
-
+    
     /**
      * Constructs the new main window.
      * 
