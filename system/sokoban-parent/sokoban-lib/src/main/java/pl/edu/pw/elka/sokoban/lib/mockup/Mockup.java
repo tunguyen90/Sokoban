@@ -76,4 +76,55 @@ public class Mockup {
         
     }
     
+    /**
+     * Returns the point on the position.
+     * 
+     * @param x the x coordinate.
+     * @param y the y coordinate.
+     * @return the point with the field state on the position.
+     */
+    public Point getPoint(final int x, final int y) {
+        
+        Point point = new Point(x, y);
+        
+        FieldState fieldStateOnPosition = getFieldStateOnPosition(x, y);
+        
+        point.setFieldState(fieldStateOnPosition);
+        
+        return point;
+        
+    }
+    
+    /**
+     * Gets field state connected to the point.
+     * 
+     * @param point interested point.
+     */
+    public void getFieldStateToPoint(final Point point) {
+        
+        int x = point.getX();
+        int y = point.getY();
+        
+        FieldState fieldStateToGet = getFieldStateOnPosition(x, y);
+        
+        point.setFieldState(fieldStateToGet);
+        
+    }
+    
+    /**
+     * Sets field state on position to value from point.
+     * 
+     * @param point interested point.
+     */
+    public void setFieldStateFromPoint(final Point point) {
+        
+        int x = point.getX();
+        int y = point.getY();
+        
+        FieldState fieldStateToSet = getFieldStateOnPosition(x, y);
+        
+        setFieldStateOnPosition(fieldStateToSet, x, y);
+        
+    }
+    
 }
