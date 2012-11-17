@@ -48,4 +48,32 @@ public class Mockup {
         
     }
     
+    /**
+     * Returns the field standing on the position.
+     * 
+     * @param x width coordinate.
+     * @param y height coordinate.
+     * @return field state.
+     */
+    public FieldState getFieldStateOnPosition(final int x, final int y) {
+        
+        // because we have height on first cooridinate
+        // and width on second
+        return board[y][x];
+        
+    }
+    
+    /**
+     * Sets the field state on the position. 
+     * 
+     * @param fieldState field state to set.
+     * @param x width coordinate.
+     * @param y height coordinate.
+     */
+    public void setFieldStateOnPosition(final FieldState fieldState, final int x, final int y) {
+        
+        board[y][x] = fieldState;
+        
+    }
+    
 }
