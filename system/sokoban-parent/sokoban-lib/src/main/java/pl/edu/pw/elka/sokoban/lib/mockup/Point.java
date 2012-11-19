@@ -25,6 +25,58 @@ public class Point {
     }
     
     /**
+     * Returns the point on the right.
+     * 
+     * @return the point on the right.
+     */
+    public Point getRightPoint() {
+        
+        Point point = new Point(x+1, y);
+        
+        return point;
+        
+    }
+    
+    /**
+     * Returns the point on the left.
+     * 
+     * @return the point on the left.
+     */
+    public Point getLeftPoint() {
+        
+        Point point = new Point(x-1, y);
+        
+        return point;
+        
+    }
+
+    /**
+     * Returns the point on the top.
+     * 
+     * @return the point on the top.
+     */
+    public Point getTopPoint() {
+        
+        Point point = new Point(x, y+1);
+        
+        return point;
+        
+    }
+    
+    /**
+     * Returns the point on the bottom.
+     * 
+     * @return the point on the bottom.
+     */
+    public Point getBottomPoint() {
+        
+        Point point = new Point(x, y-1);
+        
+        return point;
+        
+    }
+    
+    /**
      * Returns the x coordinate.
      * 
      * @return the x coordinate.

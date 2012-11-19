@@ -99,8 +99,9 @@ public class Mockup {
      * Gets field state connected to the point.
      * 
      * @param point interested point.
+     * @return current field state.
      */
-    public void getFieldStateToPoint(final Point point) {
+    public FieldState getFieldStateToPoint(final Point point) {
         
         int x = point.getX();
         int y = point.getY();
@@ -108,6 +109,8 @@ public class Mockup {
         FieldState fieldStateToGet = getFieldStateOnPosition(x, y);
         
         point.setFieldState(fieldStateToGet);
+        
+        return fieldStateToGet;
         
     }
     

@@ -29,7 +29,7 @@ public class SokobanMapLoaderTest {
             SokobanMap map = SokobanMapLoader.loadFromFile(file);
             
             String expectedMap = "XXXXXX\n" +
-                                 "X @  X\n" +
+                                 "X X@ X\n" +
                                  "XXXX X\n" +
                                  "X    X\n" +
                                  "Xo # X\n" +
