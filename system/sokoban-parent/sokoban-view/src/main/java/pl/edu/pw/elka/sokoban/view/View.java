@@ -77,7 +77,7 @@ public class View {
 			
 			@Override
 			public void run() {
-				System.out.println(mockup);
+			    
 				mainWindow.redrawMockup(mockup);
 				
 			}

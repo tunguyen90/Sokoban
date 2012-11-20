@@ -96,7 +96,7 @@ class MainWindow extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 
-                System.out.println("KeyListener "+e.getKeyCode());
+                //System.out.println("KeyListener "+e.getKeyCode());
                 
                 //TODO consider using switch() instead of if-else
                 if(e.getKeyCode() == KeyEvent.VK_M) {

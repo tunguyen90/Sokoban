@@ -31,7 +31,6 @@ public class Model {
         
         sokobanMap = SokobanMapLoader.loadFromFile("../sokoban-model/src/main/resources/" + mapName);
         
-        System.out.println(sokobanMap);
         return sokobanMap.getMockup();
         
     }
