@@ -6,10 +6,12 @@ import java.util.concurrent.BlockingQueue;
 
 import org.apache.log4j.Logger;
 
+import pl.edu.pw.elka.sokoban.controller.strategy.LoadMapStrategy;
 import pl.edu.pw.elka.sokoban.controller.strategy.Strategy;
 import pl.edu.pw.elka.sokoban.model.Model;
 import pl.edu.pw.elka.sokoban.view.View;
 import pl.edu.pw.elka.sokoban.view.event.Event;
+import pl.edu.pw.elka.sokoban.view.event.LoadMapEvent;
 
 
 /**
@@ -61,7 +63,7 @@ public class Controller {
                 
                 Strategy strategy = eventStrategyMap.get(event.getClass());
                 
-                strategy.execute(event);
+                strategy.execute(event, model, view);
                 
             } catch(InterruptedException e) {
 
@@ -76,6 +78,8 @@ public class Controller {
     }
     
     private void initMap() {
+        
+        eventStrategyMap.put(LoadMapEvent.class, new LoadMapStrategy());
         
     }
     
