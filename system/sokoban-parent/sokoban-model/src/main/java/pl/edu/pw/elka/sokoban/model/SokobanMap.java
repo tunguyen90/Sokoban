@@ -233,6 +233,17 @@ class SokobanMap {
     }
     
     /**
+     * Returns the mockup.
+     * 
+     * @return the mockup of this sokoban map.
+     */
+    public Mockup getMockup() {
+        
+        return board;
+        
+    }
+    
+    /**
      * @see java.lang.Object#toString()
      */
     @Override
