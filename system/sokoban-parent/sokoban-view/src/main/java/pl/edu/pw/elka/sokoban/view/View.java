@@ -4,6 +4,7 @@ import java.util.concurrent.BlockingQueue;
 
 import javax.swing.SwingUtilities;
 
+import pl.edu.pw.elka.sokoban.lib.mockup.Mockup;
 import pl.edu.pw.elka.sokoban.view.event.Event;
 
 
@@ -63,6 +64,26 @@ public class View {
             
         });
         
+    }
+    
+    /**
+     * Passes the mockup to redraw.
+     * 
+     * @param mockup mockup to redraw. 
+     */
+    public void redrawMockup(final Mockup mockup){
+        
+    	SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				System.out.println(mockup);
+				mainWindow.redrawMockup(mockup);
+				
+			}
+			
+		});
+    	
     }
 
 }
