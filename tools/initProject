@@ -3,7 +3,7 @@
 ######################################################
 # Use to set "tools" directory appropriately, f. e.
 # cd $PROJECT
-# tools/initProject .
+# . tools/initProject .
 ######################################################
 
 function makeDir {

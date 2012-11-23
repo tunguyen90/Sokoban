@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $1 == "--cached" ] ; then
+
+    cached="--cached"
+
+    shift 1
+
+fi
+
+fileName=$1
+
+for line in `find . | grep $fileName` ; do
+
+    echo $cached $line
+
+    git diff $cached $line
+
+done
