@@ -15,10 +15,10 @@ import pl.edu.pw.elka.sokoban.view.event.LoadMapEvent;
 public class LoadMapStrategy extends Strategy {
 
     /**
-     * @see pl.edu.pw.elka.sokoban.controller.strategy.Strategy#execute(pl.edu.pw.elka.sokoban.view.event.Event)
+     * @see pl.edu.pw.elka.sokoban.controller.strategy.Strategy#execute(pl.edu.pw.elka.sokoban.view.event.Event, pl.edu.pw.elka.sokoban.model.Model, pl.edu.pw.elka.sokoban.view.View)
      */
     @Override
-    public void execute(Event event, Model model, View view) {
+    public void execute(final Event event, final Model model, final View view) {
 
         LoadMapEvent loadMapEvent = (LoadMapEvent) event;
         
@@ -31,8 +31,9 @@ public class LoadMapStrategy extends Strategy {
             view.redrawMockup(mockup);
             
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
+            
         }
         
     }

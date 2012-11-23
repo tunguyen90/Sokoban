@@ -1,5 +1,6 @@
 package pl.edu.pw.elka.sokoban.model;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static pl.edu.pw.elka.sokoban.model.AssertPoint.assertPoints;
@@ -82,7 +83,7 @@ public class SokobanMapTest {
     }
     
     /**
-     * Test method for {@link pl.edu.pw.elka.sokoban.model.SokobanMap#findReachablePoints(Point)}
+     * Test method for {@link pl.edu.pw.elka.sokoban.model.SokobanMap#findReachablePoints}
      */
     @Test
     public final void testFindReachablePoints() {
@@ -148,7 +149,7 @@ public class SokobanMapTest {
         expectedPoints[5][4] = false;
         expectedPoints[5][5] = false;
         
-        assertEquals(expectedPoints, reachablePoints);
+        assertArrayEquals(expectedPoints, reachablePoints);
         
     }
 

@@ -18,6 +18,39 @@ import pl.edu.pw.elka.sokoban.lib.mockup.Mockup;
  */
 class SokobanMapLoader {
     
+    public static SokobanMap loadFromString(final String mapString) throws IOException {
+        
+        String[] mapRows = mapString.split("\n");
+        
+        int width = mapRows[0].length();
+        int height = mapRows.length;
+        
+        Mockup board = new Mockup(width, height);
+        
+        int rowNumber = -1; // we start from incrementing
+        
+        for(String row : mapRows) {
+            
+            rowNumber++;
+            
+            for(int i = 0; i < width; i++) {
+            
+                char letterRepresentation = row.charAt(i);
+                
+                FieldState parsedFieldState = parseField(letterRepresentation);
+                
+                board.setFieldStateOnPosition(parsedFieldState, i, rowNumber);
+            
+            }
+            
+        }
+        
+        SokobanMap map = new SokobanMap(board);
+        
+        return map;
+        
+    }
+    
     public static SokobanMap loadFromFile(final String path) throws IOException {
         
         File file = new File(path);

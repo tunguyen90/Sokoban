@@ -18,7 +18,7 @@ class SokobanMap {
     private List<Point> listOfCrates;
     private List<Point> listOfGoals;
     
-    private Mockup board;
+    Mockup board;
     
     /**
      * Constrcuts the new sokoban map.
@@ -33,74 +33,6 @@ class SokobanMap {
         listOfGoals = new LinkedList<Point>();
         
         init();
-        
-    }
-    
-    /**
-     * Returns the point.
-     * 
-     * @param x the x coordinate.
-     * @param y the y coordinate.
-     * @return the point.
-     */
-    public Point getPoint(final int x, final int y) {
-        
-        return board.getPoint(x, y);
-        
-    }
-    
-    /**
-     * Returns the start point.
-     * 
-     * @return the start point.
-     */
-    public Point getStartPoint() {
-        
-        return startPoint;
-        
-    }
-    
-    /**
-     * Returns the list of the crates.
-     * 
-     * @return the list of the crates.
-     */
-    public List<Point> getListOfCrates() {
-        
-        return listOfCrates;
-        
-    }
-    
-    /**
-     * Returns the list of the goals.
-     * 
-     * @return the list of the goals.
-     */
-    public List<Point> getListOfGoals() {
-
-        return listOfGoals;
-        
-    }
-    
-    /**
-     * Returns the map width.
-     * 
-     * @return the map width.
-     */
-    public int getWidth() {
-        
-        return board.getWidth();
-        
-    }
-    
-    /**
-     * Returns the map height.
-     * 
-     * @return the map height.
-     */
-    public int getHeight() {
-        
-        return board.getHeight();
         
     }
     
@@ -132,13 +64,148 @@ class SokobanMap {
         
     }
     
+    private boolean isShiftPossible(final Point cratePoint, final Direction direction) {
+
+        Point sokobanDestinationPoint = findSokobanPointBeforePush(cratePoint, direction);
+        
+        if(!isReachable(sokobanDestinationPoint))
+            return false;
+        
+        Point crateDestinationPoint = findCratePointAfterPush(cratePoint, direction);
+        
+        if(!isStayablePoint(crateDestinationPoint))
+                return false;
+        
+    }
+    
+    private boolean isCorner(final Point point) {
+        
+        Point topPoint = point.getTopPoint();
+        Point bottomPoint = point.getBottomPoint();
+        Point leftPoint = point.getLeftPoint();
+        Point rightPoint = point.getRightPoint();
+        
+        boolean isTopStayable = isStayablePoint(topPoint);
+        boolean isBottomStayable = isStayablePoint(bottomPoint);
+        boolean isLeftStayable = isStayablePoint(leftPoint);
+        boolean isRightStayable = isStayablePoint(rightPoint);
+        
+        if(!isTopStayable && !isLeftStayable)
+            return false;
+        
+        if(!isTopStayable && !isRightStayable)
+            return false;
+        
+        if(!isBottomStayable && !isLeftStayable)
+            return false;
+        
+        if(!isBottomStayable && !isRightStayable)
+            return false;
+        
+        return true;
+        
+    }
+    
+    private boolean isReachable(final Point point) {
+        
+        Boolean[][] reachablePoints = findReachablePoints(point);
+        
+        return reachablePoints[point.getX()][point.getY()];
+        
+    }
+
+    /**
+     * Returns the position where sokoban must stand to push a crate to a direction.
+     * 
+     * @param cratePoint point where the crate stands.
+     * @param direction direcetion which we use.
+     * @return the position where sokoban must stand to push a crate to a direction.
+     */
+    private Point findSokobanPointBeforePush(final Point cratePoint,
+            final Direction direction) {
+
+        Point sokobanDestinationPoint = null;
+        
+        if(direction == Direction.LEFT)
+            
+            sokobanDestinationPoint = cratePoint.getRightPoint();
+        
+        else if(direction == Direction.RIGHT)
+            
+            sokobanDestinationPoint = cratePoint.getLeftPoint();
+        
+        else if(direction == Direction.UP)
+            
+            sokobanDestinationPoint = cratePoint.getBottomPoint();
+        
+        else if(direction == Direction.DOWN)
+            
+            sokobanDestinationPoint = cratePoint.getTopPoint();
+        
+        return sokobanDestinationPoint;
+        
+    }
+    
+    /**
+     * Returns the position where crate will be standing after push.
+     * 
+     * @param cratePoint point where the crate stands.
+     * @param direction direcetion which we use.
+     * @return the position where crate will be standing after push.
+     */
+    private Point findCratePointAfterPush(final Point cratePoint,
+            final Direction direction) {
+
+        Point sokobanDestinationPoint = null;
+        
+        if(direction == Direction.LEFT)
+            
+            sokobanDestinationPoint = cratePoint.getLeftPoint();
+        
+        else if(direction == Direction.RIGHT)
+            
+            sokobanDestinationPoint = cratePoint.getRightPoint();
+        
+        else if(direction == Direction.UP)
+            
+            sokobanDestinationPoint = cratePoint.getTopPoint();
+        
+        else if(direction == Direction.DOWN)
+            
+            sokobanDestinationPoint = cratePoint.getBottomPoint();
+        
+        return sokobanDestinationPoint;
+        
+    }
+    
+    /**
+     * Returns number of crates on goal.
+     * 
+     * @param mockup mockup to check.
+     * @return number of crates on goal.
+     */
+    private int getNumberOfCratesOnGoal(final Mockup mockup) {
+        
+        int numberOfCratesOnGoal = 0;
+        
+        for(Point cratePoint : listOfCrates) {
+            
+            if(mockup.isSokobanOnGoal(cratePoint))
+                numberOfCratesOnGoal++;
+            
+        }
+        
+        return numberOfCratesOnGoal;
+        
+    }
+    
     /**
      * Returns the array representing reachability of the points from start poistion.
      * 
      * @param startPoint point where sokoban stays.
      * @return the reachability array.
      */
-    public Boolean[][] findReachablePoints(final Point startPoint) {
+    Boolean[][] findReachablePoints(final Point startPoint) {
         
         // null == not visited
         // true == reachable
@@ -148,7 +215,7 @@ class SokobanMap {
         for(int i = 0; i < board.getHeight(); i++)
             reachablePoints[i] = new Boolean[board.getWidth()];
         
-        isReachable(startPoint, reachablePoints);
+        isReachableInRecursion(startPoint, reachablePoints);
         
         for(int i = 0; i < board.getHeight(); i++) {
             
@@ -165,9 +232,9 @@ class SokobanMap {
         
     }
     
-    private void isReachable(final Point point, final Boolean[][] reachablePoints) {
+    private void isReachableInRecursion(final Point point, final Boolean[][] reachablePoints) {
         
-        // visited field, we don't have to check its
+        // visited field, we don't have to check it
         if(reachablePoints[point.getY()][point.getX()] != null)
             return;
         
@@ -183,16 +250,16 @@ class SokobanMap {
             Point topPoint = point.getTopPoint();
             
             if(isPointOnBoard(bottomPoint))
-                isReachable(bottomPoint, reachablePoints);
+                isReachableInRecursion(bottomPoint, reachablePoints);
             
             if(isPointOnBoard(leftPoint))
-                isReachable(leftPoint, reachablePoints);
+                isReachableInRecursion(leftPoint, reachablePoints);
             
             if(isPointOnBoard(rightPoint))
-                isReachable(rightPoint, reachablePoints);
+                isReachableInRecursion(rightPoint, reachablePoints);
             
             if(isPointOnBoard(topPoint))
-                isReachable(topPoint, reachablePoints);
+                isReachableInRecursion(topPoint, reachablePoints);
             
         }
         
@@ -223,12 +290,18 @@ class SokobanMap {
      * @param fieldState field state to check.
      * @return true if sokoban can stay on this field state.
      */
-    public boolean isStayableField(final FieldState fieldState) {
+    private boolean isStayableField(final FieldState fieldState) {
      
         return fieldState == FieldState.FREE
                 || fieldState == FieldState.GOAL
                 || fieldState == FieldState.SOKOBAN
                 || fieldState == FieldState.SOKOBAN_ON_GOAL;
+        
+    }
+    
+    private boolean isStayablePoint(final Point point) {
+        
+        return isPointOnBoard(point) && isStayableField(point.getFieldState());
         
     }
     
@@ -266,6 +339,74 @@ class SokobanMap {
         }
         
         return stringBuilder.toString();
+        
+    }
+
+    /**
+     * Returns the map height.
+     * 
+     * @return the map height.
+     */
+    public int getHeight() {
+        
+        return board.getHeight();
+        
+    }
+
+    /**
+     * Returns the map width.
+     * 
+     * @return the map width.
+     */
+    public int getWidth() {
+        
+        return board.getWidth();
+        
+    }
+
+    /**
+     * Returns the list of the crates.
+     * 
+     * @return the list of the crates.
+     */
+    public List<Point> getListOfCrates() {
+        
+        return listOfCrates;
+        
+    }
+
+    /**
+     * Returns the list of the goals.
+     * 
+     * @return the list of the goals.
+     */
+    public List<Point> getListOfGoals() {
+    
+        return listOfGoals;
+        
+    }
+
+    /**
+     * Returns the start point.
+     * 
+     * @return the start point.
+     */
+    public Point getStartPoint() {
+        
+        return startPoint;
+        
+    }
+
+    /**
+     * Returns the point.
+     * 
+     * @param x the x coordinate.
+     * @param y the y coordinate.
+     * @return the point.
+     */
+    public Point getPoint(final int x, final int y) {
+        
+        return board.getPoint(x, y);
         
     }
 

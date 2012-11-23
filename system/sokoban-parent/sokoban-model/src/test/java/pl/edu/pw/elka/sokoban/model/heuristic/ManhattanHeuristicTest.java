@@ -22,5 +22,13 @@ public class ManhattanHeuristicTest {
         assertEquals(20, heuristic.getDistance(0, 0, 10, 10));
         
     }
+    
+    /**
+     * Test method for {@link pl.edu.pw.elka.sokoban.model.heuristic.ManhattanHeuristic#getNearestCrate(pl.edu.pw.elka.sokoban.lib.mockup.Mockup, java.util.List)}.
+     */
+    @Test
+    public final void testGetNearestCrate() {
+        
+    }
 
 }

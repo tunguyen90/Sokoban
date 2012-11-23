@@ -14,9 +14,8 @@ public abstract class Strategy {
      * Executes the strategy parsing given event.
      * 
      * @param event event to parse.
-     * @param model 
-     * @param view 
-     * TODO
+     * @param model model where to execute some actions.
+     * @param view view where render a response.
      */
     public abstract void execute(final Event event, Model model, View view);
 

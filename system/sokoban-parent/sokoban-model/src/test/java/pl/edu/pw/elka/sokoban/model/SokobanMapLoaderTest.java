@@ -13,6 +13,35 @@ import org.junit.Test;
  * Test for {@link pl.edu.pw.elka.sokoban.model.SokobanMapLoader}
  */
 public class SokobanMapLoaderTest {
+    
+    /**
+     * Test method for {@link pl.edu.pw.elka.sokoban.model.SokobanMapLoader#loadFromFile(java.lang.String)}.
+     */
+    @Test
+    public final void testLoadFromString() {
+        
+        try {
+            
+            String expectedMap = "XXXXXX\n" +
+                                 "X X@ X\n" +
+                                 "XXXX X\n" +
+                                 "X    X\n" +
+                                 "Xo # X\n" +
+                                 "XXXXXX\n";
+            
+            SokobanMap map = SokobanMapLoader.loadFromString(expectedMap);
+            
+            assertEquals(expectedMap, map.toString());
+            
+        } catch(IOException e) {
+            
+            e.printStackTrace();
+            
+            fail(e.getMessage());
+            
+        }
+        
+    }
 
     /**
      * Test method for {@link pl.edu.pw.elka.sokoban.model.SokobanMapLoader#loadFromFile(java.lang.String)}.
