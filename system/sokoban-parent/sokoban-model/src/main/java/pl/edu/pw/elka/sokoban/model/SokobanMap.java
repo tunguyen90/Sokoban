@@ -76,6 +76,8 @@ class SokobanMap {
         if(!isStayablePoint(crateDestinationPoint))
                 return false;
         
+        return true;
+        
     }
     
     private boolean isCorner(final Point point) {
