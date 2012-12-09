@@ -85,7 +85,7 @@ public class BoardFileHandler {
      * @return object of class SetNewMapEvent.
      * @throws IOException
      */
-    public static SetNewMapEvent loadFromFile(final File file) throws IOException {
+    public SetNewMapEvent loadFromFile(final File file) throws IOException {
         
         List<String> listOfLines = readFileToListOfLines(file);
         
@@ -160,7 +160,7 @@ public class BoardFileHandler {
      * @param file file to read.
      * @throws IOException if general IOException occurs.
      */
-    private static List<String> readFileToListOfLines(final File file)
+    private List<String> readFileToListOfLines(final File file)
             throws IOException {
 
         FileInputStream fileInputStream = new FileInputStream(file);
@@ -191,7 +191,7 @@ public class BoardFileHandler {
      * @param boardContent 
      * 
      */
-    private static void saveToFile(File selectedFile, JLabel[][] boardContent) throws IOException {
+    private void saveToFile(File selectedFile, JLabel[][] boardContent) throws IOException {
         
         String boardString = new String();
         
@@ -208,7 +208,7 @@ public class BoardFileHandler {
         saveBoardStringToFile(selectedFile, boardString);
     }
     
-    private static void saveBoardStringToFile(File selectedFile,
+    private void saveBoardStringToFile(File selectedFile,
             String boardString) throws IOException {
         
         FileOutputStream fileOutputStream = new FileOutputStream(selectedFile);
@@ -231,7 +231,7 @@ public class BoardFileHandler {
      * @return field state value.
      * @throws IOException if inappropriate letter occurs.
      */
-    private static FieldState parseField(final char letterRepresentation) throws IOException {
+    private FieldState parseField(final char letterRepresentation) throws IOException {
         
         if(FieldState.BRICK.toString().equals(""+letterRepresentation))
             return FieldState.BRICK;
