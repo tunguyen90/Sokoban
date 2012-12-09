@@ -1,8 +1,5 @@
 package pl.edu.pw.elka.sokoban.controller.strategy;
 
-import java.io.IOException;
-
-import pl.edu.pw.elka.sokoban.lib.mockup.Mockup;
 import pl.edu.pw.elka.sokoban.model.Model;
 import pl.edu.pw.elka.sokoban.view.View;
 import pl.edu.pw.elka.sokoban.view.event.Event;
@@ -24,17 +21,17 @@ public class LoadMapStrategy extends Strategy {
         
         String mapName = loadMapEvent.getMapName();
         
-        try {
-            // TODO IO Exception
-            Mockup mockup = model.loadMap(mapName);
-            
-            view.redrawMockup(mockup);
-            
-        } catch (IOException e) {
-            
-            e.printStackTrace();
-            
-        }
+//        try {
+//            // TODO IO Exception
+////            Mockup mockup = model.loadMap(mapName);
+////            
+////            view.redrawMockup(mockup);
+//            
+//        } catch (IOException e) {
+//            
+//            e.printStackTrace();
+//            
+//        }
         
     }
 

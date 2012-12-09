@@ -1,0 +1,9 @@
+package classes
+methods isWall()... in ConstantField
+p argument
+direction array
+heuristics
+move has box to ?
+
+
+forbidden field - reachable goals size 0

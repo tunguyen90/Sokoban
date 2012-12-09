@@ -6,7 +6,7 @@ package pl.edu.pw.elka.sokoban.lib.mockup;
  */
 public class Mockup {
     
-    private Point sokobanPoint;
+    private MockupPoint sokobanPoint;
 
     private FieldState[][] board;
     
@@ -33,7 +33,7 @@ public class Mockup {
      * 
      * @return the point where sokoban currently stands.
      */
-    public Point getSokobanPoint() {
+    public MockupPoint getSokobanPoint() {
         
         return sokobanPoint;
         
@@ -98,9 +98,9 @@ public class Mockup {
      * @param y the y coordinate.
      * @return the point with the field state on the position.
      */
-    public Point getPoint(final int x, final int y) {
+    public MockupPoint getPoint(final int x, final int y) {
         
-        Point point = new Point(x, y);
+        MockupPoint point = new MockupPoint(x, y);
         
         FieldState fieldStateOnPosition = getFieldStateOnPosition(x, y);
         
@@ -116,7 +116,7 @@ public class Mockup {
      * @param point interested point.
      * @return current field state.
      */
-    public FieldState getFieldStateToPoint(final Point point) {
+    public FieldState getFieldStateToPoint(final MockupPoint point) {
         
         int x = point.getX();
         int y = point.getY();
@@ -134,7 +134,7 @@ public class Mockup {
      * 
      * @param point interested point.
      */
-    public void setFieldStateFromPoint(final Point point) {
+    public void setFieldStateFromPoint(final MockupPoint point) {
         
         int x = point.getX();
         int y = point.getY();
@@ -164,7 +164,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is a brick.
      */
-    public boolean isBrick(final Point point) {
+    public boolean isBrick(final MockupPoint point) {
         
         return isBrick(point.getX(), point.getY());
         
@@ -189,7 +189,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is a goal.
      */
-    public boolean isGoal(final Point point) {
+    public boolean isGoal(final MockupPoint point) {
         
         return isGoal(point.getX(), point.getY());
         
@@ -214,7 +214,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is a crate.
      */
-    public boolean isCrate(final Point point) {
+    public boolean isCrate(final MockupPoint point) {
         
         return isCrate(point.getX(), point.getY());
         
@@ -239,7 +239,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is sokoban.
      */
-    public boolean isSokoban(final Point point) {
+    public boolean isSokoban(final MockupPoint point) {
         
         return isSokoban(point.getX(), point.getY());
         
@@ -264,7 +264,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is a crate on goal.
      */
-    public boolean isCrateOnGoal(final Point point) {
+    public boolean isCrateOnGoal(final MockupPoint point) {
         
         return isCrateOnGoal(point.getX(), point.getY());
         
@@ -289,7 +289,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is sokoban on goal.
      */
-    public boolean isSokobanOnGoal(final Point point) {
+    public boolean isSokobanOnGoal(final MockupPoint point) {
         
         return isSokobanOnGoal(point.getX(), point.getY());
         
@@ -314,7 +314,7 @@ public class Mockup {
      * @param point point to check.
      * @return if the field is a free field.
      */
-    public boolean isFree(final Point point) {
+    public boolean isFree(final MockupPoint point) {
         
         return isFree(point.getX(), point.getY());
         
@@ -323,7 +323,7 @@ public class Mockup {
     private void setIfSokobanOnField(final int x, final int y) {
         
         if(isSokoban(x, y) || isSokobanOnGoal(x, y))
-            sokobanPoint = new Point(x, y);
+            sokobanPoint = new MockupPoint(x, y);
         
     }
     

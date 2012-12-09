@@ -4,7 +4,7 @@ package pl.edu.pw.elka.sokoban.lib.mockup;
 /**
  * Class representing point on the mockup or board.
  */
-public class Point {
+public class MockupPoint {
 
     private int x;
     private int y;
@@ -17,7 +17,7 @@ public class Point {
      * @param x the x coordinate.
      * @param y the y coordinate.
      */
-    public Point(final int x, final int y) {
+    public MockupPoint(final int x, final int y) {
         
         this.x = x;
         this.y = y;
@@ -29,9 +29,9 @@ public class Point {
      * 
      * @return the point on the right.
      */
-    public Point getRightPoint() {
+    public MockupPoint getRightPoint() {
         
-        Point point = new Point(x+1, y);
+        MockupPoint point = new MockupPoint(x+1, y);
         
         return point;
         
@@ -42,9 +42,9 @@ public class Point {
      * 
      * @return the point on the left.
      */
-    public Point getLeftPoint() {
+    public MockupPoint getLeftPoint() {
         
-        Point point = new Point(x-1, y);
+        MockupPoint point = new MockupPoint(x-1, y);
         
         return point;
         
@@ -55,9 +55,9 @@ public class Point {
      * 
      * @return the point on the top.
      */
-    public Point getTopPoint() {
+    public MockupPoint getTopPoint() {
         
-        Point point = new Point(x, y+1);
+        MockupPoint point = new MockupPoint(x, y+1);
         
         return point;
         
@@ -68,9 +68,9 @@ public class Point {
      * 
      * @return the point on the bottom.
      */
-    public Point getBottomPoint() {
+    public MockupPoint getBottomPoint() {
         
-        Point point = new Point(x, y-1);
+        MockupPoint point = new MockupPoint(x, y-1);
         
         return point;
         

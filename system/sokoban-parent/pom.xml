@@ -15,7 +15,7 @@
 	</properties>
 
 	<modules>
-		<module>sokoban-lib</module>
+        <module>sokoban-lib</module>
 		<module>sokoban-model</module>
 		<module>sokoban-view</module>
 		<module>sokoban-start</module>
