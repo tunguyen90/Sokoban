@@ -26,7 +26,7 @@ public class View {
 
         this.blockingQueue = blockingQueue;
         
-        mainWindow = new MainWindow(blockingQueue);
+        mainWindow = new MainWindow(this.blockingQueue);
 
     }
     

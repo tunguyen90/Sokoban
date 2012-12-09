@@ -96,5 +96,9 @@ class MockupPanel extends JPanel {
         boardContent[y][x].setText(state.toString());
         
     }
+
+    public JLabel[][] getBoardContent() {
+        return boardContent;
+    }
     
 }

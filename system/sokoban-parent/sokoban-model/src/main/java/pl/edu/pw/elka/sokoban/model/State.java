@@ -244,6 +244,7 @@ public class State {
 
     /**
      * Returns the list of boxes.
+     * @return 
      */
     public Point[] getListOfBoxes() {
         
@@ -647,6 +648,7 @@ public class State {
 
     /**
      * Goal test. Check if all the boxes are on goal squares.
+     * @return 
      */
     public boolean isGoalReached() {
         return getNumberOfBoxesInGoal() == listOfBoxes.length;
